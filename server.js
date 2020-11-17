@@ -7,8 +7,10 @@ const cookieSession = require('cookie-session')
 const cookieParser = require('cookie-parser')
 const AuthRoute = require('./routes/auth.js')
 const path = require('path')
+const GreeceRoute = require('./routes/greece')
 
 app.use('/auth', AuthRoute)
+app.use('/gr', GreeceRoute)
 
 app.use(cors())
 app.use(cookieParser())

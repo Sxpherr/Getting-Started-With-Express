@@ -6,6 +6,7 @@ const passport = require('passport');
 const cookieSession = require('cookie-session')
 require("../server.js")
 require("../auth/google.js")
+require("../auth/discord")
 
 
 router.use(cors())
@@ -46,6 +47,15 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
   function(req, res) {
 
     res.redirect('/home');
+  }
+);
+
+router.get('/discord', passport.authenticate('discord', { scope: ["identify"] }))
+
+router.get('/discord/callback', passport.authenticate('discord', { failureRedirect: '/failed'}),
+  function(req, res) {
+      
+    res.redirect('/home')
   }
 );
 
