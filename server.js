@@ -4,12 +4,14 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const passport = require('passport');
 const cookieSession = require('cookie-session')
+const cookieParser = require('cookie-parser')
 const AuthRoute = require('./routes/auth.js')
 const path = require('path')
 
 app.use('/auth', AuthRoute)
 
 app.use(cors())
+app.use(cookieParser())
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -40,7 +42,8 @@ app.use(passport.session());
 app.get('/home', isLoggedIn, (req, res) => res.send(`Welcome my g!`))
 
 app.get('/', function(req, res) {
-  res.send('hello word')
+  res.cookie("username", "Sxpherr")
+  res.send('Welcome To ExpressJS')
 })
 
 app.listen(3000, () => console.log(`Server Listening On Port ${3000}!`))
